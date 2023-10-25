@@ -30,6 +30,10 @@ function _init()
 						
 						--simple camera
 						cam_x=0
+						
+						--map limits
+						map_start=0
+						map_end=1024
 end
 
 
@@ -43,6 +47,13 @@ function _update()
 
 		--simple camera
 		cam_x=player.x-55+(player.w/2)
+		if cam_x<map_start then
+		  cam_x=map_start
+		end
+		if cam_x>map_end-128 then
+		  cam_x=map_end-128
+		end
+		
 		camera(cam_x,0)
 end
 		
@@ -175,7 +186,13 @@ function player_update()
 		player.x+=player.dx
 		player.y+=player.dy
 		
-		
+		--limit player to map
+		if player.x<map_start then
+		  player.x=map_start
+		end
+		if player.x>map_end-player.w then
+		  player.x=map_end-player.w
+		end	
 end
 __gfx__
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
